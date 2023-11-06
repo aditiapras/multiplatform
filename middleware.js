@@ -27,20 +27,7 @@ export default async function middleware(req) {
     searchParams.length > 0 ? `?${searchParams}` : ""
   }`;
 
-  // if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
-  //   const session = await getToken({ req });
-  //   if (!session && path !== "/login") {
-  //     return NextResponse.redirect(new URL("/login", req.url));
-  //   } else if (session && path == "/signup") {
-  //     return NextResponse.redirect(new URL("/", req.url));
-  //   } else if (session && path == "/login") {
-  //     return NextResponse.redirect(new URL("/", req.url));
-  //   }
-
-  //   return NextResponse.rewrite(
-  //     new URL(`/app${path === "/" ? "" : path}`, req.url)
-  //   );
-  // }
+  const subdomain = hostname.split(".")[0];
 
   if (
     hostname === "localhost:3000" ||
@@ -55,21 +42,15 @@ export default async function middleware(req) {
     );
   }
 
-  // const data = await fetch(
-  //   `${process.env.NEXT_PUBLIC_FETCH_URL}/domains?name=${hostname}`
-  // ).then((res) => {
-  //   return res.json();
-  // });
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_FETCH_URL}/domains?name=${subdomain}`
+  ).then((res) => {
+    return res.json();
+  });
 
-  // if (data.isListed === false) {
-  //   const host = req.url;
-  //   // console.log(req.url);
-  //   console.log(host);
-  //   return NextResponse.rewrite(new URL(`/home`, req.url));
-  // } else {
-  //   // rewrite everything else to `/[domain]/[slug] dynamic route
-  //   return NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
-  // }
-  // rewrite everything else to `/[domain]/[slug] dynamic route
-  return NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
+  if (data.isListed === false) {
+    return NextResponse.redirect("https://lettre.id");
+  } else {
+    return NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
+  }
 }
