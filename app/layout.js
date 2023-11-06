@@ -1,8 +1,6 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./sessionProviders";
-
-const inter = Inter({ subsets: ["latin"] });
+import { GeistSans } from "geist/font";
 
 export const metadata = {
   title: "Create Next App",
@@ -11,8 +9,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={(inter.className, "bg-zinc-50")}>
+    <html lang="en" className={GeistSans.className}>
+      <body className={"bg-zinc-50"}>
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

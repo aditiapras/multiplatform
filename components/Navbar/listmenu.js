@@ -10,7 +10,7 @@ export default function ListMenu() {
         href={`/dashboard`}
         className={`px-3 py-1 text-sm text-zinc-500 rounded-sm hover:bg-zinc-100 transition ${
           pathname === "/dashboard"
-            ? "underline underline-offset-[16px] decoration-2 decoration-zinc-900 text-zinc-900"
+            ? "underline underline-offset-[16px] decoration-2 decoration-blue-500 text-zinc-900"
             : ""
         } `}
       >
@@ -20,7 +20,7 @@ export default function ListMenu() {
         href={`/dashboard/details`}
         className={`px-3 py-1 text-sm text-zinc-500 rounded-sm hover:bg-zinc-100 transition ${
           pathname === "/dashboard/details"
-            ? "underline underline-offset-[16px] decoration-2 decoration-zinc-900 text-zinc-900"
+            ? "underline underline-offset-[16px] decoration-2 decoration-blue-500 text-zinc-900"
             : ""
         } `}
       >
@@ -30,7 +30,7 @@ export default function ListMenu() {
         href={`/dashboard/guest`}
         className={`px-3 py-1 text-sm text-zinc-500 rounded-sm hover:bg-zinc-100 transition ${
           pathname === "/dashboard/guest"
-            ? "underline underline-offset-[16px] decoration-2 decoration-zinc-900 text-zinc-900"
+            ? "underline underline-offset-[16px] decoration-2 decoration-blue-500 text-zinc-900"
             : ""
         } `}
       >
@@ -40,7 +40,7 @@ export default function ListMenu() {
         href={`/dashboard/settings`}
         className={`px-3 py-1 text-sm text-zinc-500 rounded-sm hover:bg-zinc-100 transition ${
           pathname === "/dashboard/settings"
-            ? "underline underline-offset-[16px] decoration-2 decoration-zinc-900 text-zinc-900"
+            ? "underline underline-offset-[16px] decoration-2 decoration-blue-500 text-zinc-900"
             : ""
         }`}
       >

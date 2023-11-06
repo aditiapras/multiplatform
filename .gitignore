@@ -7,6 +7,9 @@
 .yarn/install-state.gz
 .vscode
 
+# prisma migrations
+/prisma/migrations
+
 # testing
 /coverage
 

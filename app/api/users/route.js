@@ -76,7 +76,7 @@ export async function PUT(request) {
     akad_time,
     wedding_date,
     wedding_time,
-    weddingLocation,
+    wedding_location,
     bridesName,
     groomsName,
     brides_fathers_name,
@@ -100,11 +100,11 @@ export async function PUT(request) {
           WeddingDetail: {
             update: {
               updated_at: moment().toISOString(),
-              akad_date,
-              akad_time,
-              wedding_date,
-              wedding_time,
-              weddingLocation,
+              akad_date: moment(akad_date).toISOString(),
+              akad_time: moment(akad_time).toISOString(),
+              wedding_date: moment(wedding_date).toISOString(),
+              wedding_time: moment(wedding_time).toISOString(),
+              wedding_location,
               bridesName,
               groomsName,
               brides_fathers_name,
@@ -151,6 +151,7 @@ export async function PUT(request) {
       return NextResponse.json("error");
     }
   } catch (error) {
+    console.log(error);
     return NextResponse.json({
       message: "Cannot find user with id " + id + ", Please check userId",
     });
