@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userId            String               @unique
+  username          String               @db.VarChar(255)
+  email             String               @db.VarChar(255)
+  avatar            String?              @db.VarChar(255)
+  accountVerified   Boolean
+  connectWithGoogle Boolean
+  password          String?              @db.VarChar(255)
+  phoneNumber       String?              @db.VarChar(255)
+  placeOfBirth      String?              @db.VarChar(255)
+  dateOfBirth       DateTime?            @db.DateTime()
+  guest             Guest[]
+  WeddingDetail     WeddingDetail?
+  subscription      SubscriptionFeature?
+}
+
+model Guest {
+  guestId          Int       @unique
+  url              String?   @db.VarChar(255)
+  crated_at        DateTime? @db.DateTime()
+  updated_at       DateTime? @db.DateTime()
+  name             String?   @db.VarChar(255)
+  address          String?   @db.VarChar(255)
+  phoneNumber      String?   @db.VarChar(255)
+  relationship     String?   @db.VarChar(255)
+  invitationStatus String?   @db.VarChar(255)
+  wishes           String?   @db.VarChar(500)
+  rsvp             String?   @db.VarChar(255)
+  User             User?     @relation(fields: [userId], references: [userId])
+  userId           String?
+}
+
+model WeddingDetail {
+  user                User      @relation(fields: [userId], references: [userId])
+  userId              String    @unique
+  created_at          DateTime  @db.DateTime()
+  updated_at          DateTime? @db.DateTime()
+  akad_date           DateTime? @db.DateTime()
+  akad_time           DateTime? @db.DateTime()
+  wedding_date        DateTime? @db.DateTime()
+  wedding_time        DateTime? @db.DateTime()
+  wedding_location    String?   @db.VarChar(255)
+  bridesName          String?   @db.VarChar(255)
+  groomsName          String?   @db.VarChar(255)
+  brides_fathers_name String?   @db.VarChar(255)
+  brides_mothers_name String?   @db.VarChar(255)
+  grooms_fathers_name String?   @db.VarChar(255)
+  grooms_mothers_name String?   @db.VarChar(255)
+  domain              String?   @db.VarChar(255)
+}
+
+model SubscriptionFeature {
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [userId])
+  plans  String @default("Basic") @db.VarChar(255)
+}
