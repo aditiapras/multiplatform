@@ -7,18 +7,18 @@ import Image from "next/image";
 export default async function Navbar({ session }) {
   const username = session?.user.name;
   const userId = session?.user.id;
-  const data = await fetch(`http://localhost:3000/api/users?id=${userId}`).then(
-    (res) => {
-      return res.json();
-    }
-  );
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_FETCH_URL}/users?id=${userId}`
+  ).then((res) => {
+    return res.json();
+  });
   const avatar = data.avatar;
   return (
     <nav className="w-full flex flex-col border-b bg-white/80 backdrop-blur-sm sticky top-0">
       <div className="flex items-center justify-between px-7 h-16">
         <div className="flex gap-2 items-center">
           <PiFlowerBold className="text-2xl" />
-          <p className="text-2xl font-semibold">Lucide Invitation</p>
+          <p className="text-2xl font-semibold">Lettre</p>
         </div>
         <div className="flex items-center gap-5">
           <p className="text-muted-foreground hover:text-foreground">Help</p>
