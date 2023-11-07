@@ -34,7 +34,7 @@ export default async function middleware(req) {
     hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN
   ) {
     const session = await getToken({ req });
-    if (!session && path == "/dashboard") {
+    if (!session && path.includes("dashboard")) {
       return NextResponse.redirect(new URL("/login", req.url));
     }
     return NextResponse.rewrite(
