@@ -3,18 +3,36 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MailPlus, Pencil } from "lucide-react";
-// import { useServerFetch } from "@/lib/fetcher/server-side-fetch";
-// import ConnectWithGoogle from "@/components/page/account/connectGoogle";
 
 export default async function Dashboard() {
   const session = await getServerSession(authOptions);
-
   const userId = session?.user.id;
+
+  const users = await fetch(
+    `${process.env.NEXT_PUBLIC_FETCH_URL}/users?id=${userId}`
+  ).then((res) => res.json());
+
+  const isVerified = users.isVerified;
 
   return (
     <main className="w-full flex flex-col px-7 py-5 bg-zinc-50">
       <div className="flex flex-col gap-5 w-3/4 mx-auto mt-5">
-        <p className="font-semibold text-2xl">Welcome to lettre.id</p>
+        <div className="flex items-center justify-between">
+          <p className="font-semibold text-2xl">Welcome to lettre.id</p>
+          {isVerified === false && (
+            <div className="flex items-end gap-1">
+              <p className="text-zinc-500 font-medium text-xs flex gap-1">
+                Seems like you haven{"'"}t verified your email yet,
+                <a
+                  href={`${process.env.NEXTAUTH_URL}/accountverification?token=${userId}`}
+                  className="hover:underline text-blue-500"
+                >
+                  Verify your email.
+                </a>
+              </p>
+            </div>
+          )}
+        </div>
         <p className="text-zinc-500">
           Let{"'"}s setup your first invitation letter.
         </p>
