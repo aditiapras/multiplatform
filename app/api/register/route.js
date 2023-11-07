@@ -32,11 +32,28 @@ export async function POST(request) {
           username,
           email,
           password: hashedPassword,
-          accountVerified: true,
-          connectWithGoogle: false,
+          passwordless: false,
+          oAuth: false,
+          oAuthType: null,
+          isVerified: false,
           subscription: {
             create: {
               plans: "Basic",
+              prices: 0,
+              activePeriods: 3,
+              features: {
+                create: {
+                  customSongs: false,
+                  maxImages: 6,
+                  whatsappSend: false,
+                  videos: false,
+                  unlimitedGuests: false,
+                  totalGuests: 500,
+                  loveStory: false,
+                  personalized: false,
+                  themes: false,
+                },
+              },
             },
           },
           WeddingDetail: {

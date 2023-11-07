@@ -82,11 +82,28 @@ export const authOptions = {
               username: profile.name,
               email: profile.email,
               avatar: profile.picture,
-              accountVerified: false,
-              connectWithGoogle: true,
+              passwordless: true,
+              oAuth: true,
+              oAuthType: "google",
+              isVerified: true,
               subscription: {
                 create: {
                   plans: "Basic",
+                  prices: 0,
+                  activePeriods: 3,
+                  features: {
+                    create: {
+                      customSongs: false,
+                      maxImages: 6,
+                      whatsappSend: false,
+                      videos: false,
+                      unlimitedGuests: false,
+                      totalGuests: 500,
+                      loveStory: false,
+                      personalized: false,
+                      themes: false,
+                    },
+                  },
                 },
               },
               WeddingDetail: {
@@ -120,7 +137,7 @@ export const authOptions = {
   pages: {
     signIn: "/login",
     verifyRequest: `/login`,
-    error: "/login", //
+    error: "/login",
   },
 };
 
