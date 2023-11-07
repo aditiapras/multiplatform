@@ -12,19 +12,21 @@ datasource db {
 }
 
 model User {
-  userId            String               @unique
-  username          String               @db.VarChar(255)
-  email             String               @db.VarChar(255)
-  avatar            String?              @db.VarChar(255)
-  accountVerified   Boolean
-  connectWithGoogle Boolean
-  password          String?              @db.VarChar(255)
-  phoneNumber       String?              @db.VarChar(255)
-  placeOfBirth      String?              @db.VarChar(255)
-  dateOfBirth       DateTime?            @db.DateTime()
-  guest             Guest[]
-  WeddingDetail     WeddingDetail?
-  subscription      SubscriptionFeature?
+  userId        String               @unique
+  username      String               @db.VarChar(255)
+  email         String               @db.VarChar(255)
+  avatar        String?              @db.VarChar(255)
+  passwordless  Boolean
+  oAuth         Boolean
+  oAuthType     String?
+  isVerified    Boolean?
+  password      String?              @db.VarChar(255)
+  phoneNumber   String?              @db.VarChar(255)
+  placeOfBirth  String?              @db.VarChar(255)
+  dateOfBirth   DateTime?            @db.DateTime()
+  guest         Guest[]
+  WeddingDetail WeddingDetail?
+  subscription  SubscriptionFeature?
 }
 
 model Guest {
@@ -44,26 +46,55 @@ model Guest {
 }
 
 model WeddingDetail {
-  user                User      @relation(fields: [userId], references: [userId])
-  userId              String    @unique
-  created_at          DateTime  @db.DateTime()
-  updated_at          DateTime? @db.DateTime()
-  akad_date           DateTime? @db.DateTime()
-  akad_time           DateTime? @db.DateTime()
-  wedding_date        DateTime? @db.DateTime()
-  wedding_time        DateTime? @db.DateTime()
-  wedding_location    String?   @db.VarChar(255)
-  bridesName          String?   @db.VarChar(255)
-  groomsName          String?   @db.VarChar(255)
-  brides_fathers_name String?   @db.VarChar(255)
-  brides_mothers_name String?   @db.VarChar(255)
-  grooms_fathers_name String?   @db.VarChar(255)
-  grooms_mothers_name String?   @db.VarChar(255)
-  domain              String?   @db.VarChar(255)
+  user                User             @relation(fields: [userId], references: [userId])
+  userId              String           @unique
+  domain              String?          @db.VarChar(255)
+  created_at          DateTime         @db.DateTime()
+  updated_at          DateTime?        @db.DateTime()
+  akad_date           DateTime?        @db.DateTime()
+  akad_time           DateTime?        @db.DateTime()
+  wedding_date        DateTime?        @db.Time()
+  wedding_time        DateTime?        @db.Time()
+  wedding_location    String?          @db.VarChar(255)
+  bridesName          String?          @db.VarChar(255)
+  groomsName          String?          @db.VarChar(255)
+  brides_fathers_name String?          @db.VarChar(255)
+  brides_mothers_name String?          @db.VarChar(255)
+  grooms_fathers_name String?          @db.VarChar(255)
+  grooms_mothers_name String?          @db.VarChar(255)
+  bridesImages        String?          @db.VarChar(300)
+  groomsImages        String?          @db.VarChar(300)
+  coverImages         String?          @db.VarChar(300)
+  coupleImages        String?          @db.VarChar(300)
+  pictures            PictureGallery[]
 }
 
 model SubscriptionFeature {
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [userId])
-  plans  String @default("Basic") @db.VarChar(255)
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [userId])
+  plans         String    @default("Basic") @db.VarChar(255)
+  features      Features?
+  activePeriods Int?
+  prices        Int?
+}
+
+model Features {
+  customSongs     Boolean?
+  maxImages       Int?
+  whatsappSend    Boolean?
+  videos          Boolean?
+  unlimitedGuests Boolean?
+  totalGuests     Int?
+  loveStory       Boolean?
+  personalized    Boolean?
+  themes          Boolean?
+  user            SubscriptionFeature @relation(fields: [userId], references: [userId])
+  userId          String              @unique
+}
+
+model PictureGallery {
+  id            String         @id
+  url           String?
+  WeddingDetail WeddingDetail? @relation(fields: [userId], references: [userId])
+  userId        String?
 }
