@@ -4,6 +4,7 @@ import ListMenu from "./listmenu";
 import { Bell } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default async function Navbar({ session }) {
   const username = session?.user.name;
@@ -15,7 +16,7 @@ export default async function Navbar({ session }) {
   });
   const avatar = data.avatar;
   return (
-    <nav className="w-full flex flex-col border-b bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+    <nav className="w-full flex flex-col border-b bg-white/90 backdrop-blur-sm sticky top-0 z-10">
       <div className="flex items-center justify-between px-10 h-20">
         <div className="flex gap-2 items-center">
           <p className="text-3xl font-semibold">Lettré</p>
@@ -25,20 +26,14 @@ export default async function Navbar({ session }) {
             Help
           </p>
 
-          <p className="font-light text-sm">Hi, {username}</p>
-          {(avatar == null || avatar == "") && (
-            <div className="p-1 border rounded-full flex items-center justify-center bg-orange-500 hover:bg-orange-400">
-              <p className="w-5 h-5 flex items-center justify-center text-white">
-                {username?.charAt(0)}
-              </p>
-            </div>
-          )}
+          <p className="font-light text-sm">{username}</p>
 
-          {avatar != null && avatar != "" && (
-            <div className="border rounded-full flex items-center justify-center overflow-hidden w-[30px] h-[30px] hover:outline outline-2 outline-emerald-500 transition-all">
-              <Image src={avatar} alt={username} width={30} height={30} />
-            </div>
-          )}
+          <Avatar>
+            <AvatarImage src={avatar} />
+            <AvatarFallback className="text-xl font-medium bg-orange-500 text-white">
+              {username?.charAt(0)}
+            </AvatarFallback>
+          </Avatar>
 
           <Logout />
         </div>
