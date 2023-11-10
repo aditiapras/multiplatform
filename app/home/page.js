@@ -36,10 +36,10 @@ export default function Page() {
         </div>
         <div className="flex items-center gap-3">
           <Button variant="ghost" asChild>
-            <Link href="/login">Sign in</Link>
+            <a href="/login">Sign in</a>
           </Button>
           <Button asChild>
-            <Link href="/register">Start for free</Link>
+            <a href="/register">Start for free</a>
           </Button>
         </div>
       </nav>
@@ -56,13 +56,13 @@ export default function Page() {
             Meet Lettre – an easier way to accelerate your invitation letter.
             Free up to 500 guests.
           </p>
-          <Link
+          <a
             href={"/login"}
             className="relative group text-sm font-medium flex gap-2 items-center w-fit border border-zinc-900 hover:border-orange-500 rounded-full px-5 py-2 mt-5 transition-all duration-200"
           >
             Get started{" "}
             <ChevronRight className="h-4 w-4 group-hover:text-orange-500 group-hover:translate-x-2 transition-all duration-300" />
-          </Link>
+          </a>
           {/* <Button className="w-fit mt-10 rounded-full">Get started</Button> */}
         </div>
       </section>
