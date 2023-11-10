@@ -64,19 +64,20 @@ export default function SignIn() {
     }
   };
   return (
-    <Card className="w-full sm:w-[500px] border-none shadow-none">
+    <Card className="w-full sm:w-[500px] border-none shadow-none bg-zinc-50">
       <CardHeader>
         {/* <div className="w-full flex items-center justify-center mb-10"> */}
         <MailOpen className="h-10 w-10 text-blue-700 mb-5" />
         {/* </div> */}
         <CardTitle>
-          <span className="font-normal">Sign in to</span> Léttre.id
+          <span className="font-normal">Sign in to</span>{" "}
+          <a href="/">Léttre.id</a>
         </CardTitle>
         <CardDescription className="text-base">
           Dont have account?{" "}
-          <Link href="/register" className="text-blue-700 hover:underline">
+          <a href="/register" className="text-blue-700 hover:underline">
             Sign up
-          </Link>
+          </a>
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4 w-full">

@@ -72,7 +72,7 @@ export default function SignUp() {
     }
   };
   return (
-    <Card className="w-full sm:w-[500px] border-none shadow-none">
+    <Card className="w-full sm:w-[500px] border-none shadow-none bg-zinc-50">
       <CardHeader>
         <MailOpen className="h-10 w-10 text-blue-700 mb-5" />
         <CardTitle>
@@ -80,9 +80,9 @@ export default function SignUp() {
         </CardTitle>
         <CardDescription className="text-base">
           Already have an account?{" "}
-          <Link href="/login" className="text-blue-700 hover:underline">
+          <a href="/login" className="text-blue-700 hover:underline">
             Sign in
-          </Link>
+          </a>
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4 w-full">
