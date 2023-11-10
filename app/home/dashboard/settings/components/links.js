@@ -10,7 +10,7 @@ export default function Links({ params }) {
         className={
           !params
             ? "text-left text-sm font-medium"
-            : "text-left text-sm text-zinc-500"
+            : "text-left text-sm text-zinc-500 hover:text-zinc-800 transition-all"
         }
       >
         Account
@@ -20,7 +20,7 @@ export default function Links({ params }) {
         className={
           params == "profile"
             ? "text-left text-sm font-medium"
-            : "text-left text-sm text-zinc-500"
+            : "text-left text-sm text-zinc-500 hover:text-zinc-800 transition-all"
         }
       >
         Profile
@@ -30,7 +30,7 @@ export default function Links({ params }) {
         className={
           params == "subscriptions"
             ? "text-left text-sm font-medium"
-            : "text-left text-sm text-zinc-500"
+            : "text-left text-sm text-zinc-500 hover:text-zinc-800 transition-all"
         }
       >
         Subscriptions

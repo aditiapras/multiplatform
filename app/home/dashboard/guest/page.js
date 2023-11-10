@@ -10,7 +10,6 @@ export default async function Page() {
   const { guest } = await fetch(
     `${process.env.NEXT_PUBLIC_FETCH_URL}/users?id=${userId}`
   ).then((res) => res.json());
-  console.log(guest);
 
   return (
     <main className="w-full flex flex-col px-7 pt-5 pb-20 bg-zinc-50">
