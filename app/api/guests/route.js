@@ -7,6 +7,8 @@ const prisma = new PrismaClient();
 export async function POST(request) {
   const url = new URL(request.url);
   const id = url.searchParams.get("id");
+  const type = url.searchParams.get("type");
+
   const {
     name,
     address,
@@ -17,32 +19,73 @@ export async function POST(request) {
     rsvp,
   } = await request.json();
 
-  try {
-    const data = await prisma.user.update({
-      where: {
-        userId: id,
-      },
-      data: {
-        guest: {
-          create: {
-            guestId: moment().unix(),
-            crated_at: moment().toISOString(),
-            updated_at: moment().toISOString(),
-            name,
-            address,
-            phoneNumber,
-            relationship,
-            invitationStatus,
-            wishes,
-            rsvp,
-          },
-        },
-      },
-    });
-    return NextResponse.json({ message: "Successfully added guest.", name });
-  } catch (error) {
-    return NextResponse.json({ message: "Cannot find user with this id" });
-  }
+  const data = await request.json();
+
+  data.map((data) => {
+    console.log(data);
+    return data;
+  });
+
+  return NextResponse.json("test");
+
+  // try {
+  //   if (type == "single") {
+  //     const data = await prisma.user.update({
+  //       where: {
+  //         userId: id,
+  //       },
+  //       data: {
+  //         guest: {
+  //           create: {
+  //             guestId: moment().unix(),
+  //             crated_at: moment().toISOString(),
+  //             updated_at: moment().toISOString(),
+  //             name,
+  //             address,
+  //             phoneNumber,
+  //             relationship,
+  //             invitationStatus,
+  //             wishes,
+  //             rsvp,
+  //           },
+  //         },
+  //       },
+  //     });
+  //     return NextResponse.json({ message: "Successfully added guest.", name });
+  //   } else if (type == "multiple") {
+  //     const data = await prisma.user.update({
+  //       where: {
+  //         userId: id,
+  //       },
+  //       data: {
+  //         guest: {
+  //           createMany: {
+  //             data: [
+  //               {
+  //                 guestId: moment().unix(),
+  //                 crated_at: moment().toISOString(),
+  //                 updated_at: moment().toISOString(),
+  //                 name,
+  //                 address,
+  //                 phoneNumber,
+  //                 relationship,
+  //                 invitationStatus,
+  //                 wishes,
+  //                 rsvp,
+  //               },
+  //             ],
+  //           },
+  //         },
+  //       },
+  //     });
+  //     return NextResponse.json({
+  //       message: "Successfully added multiple guests.",
+  //     });
+  //   }
+  // } catch (error) {
+  //   console.log(error);
+  //   return NextResponse.json({ message: "Cannot find user with this id" });
+  // }
 }
 
 export async function PUT(request) {

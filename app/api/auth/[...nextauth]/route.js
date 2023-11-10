@@ -73,7 +73,12 @@ export const authOptions = {
         const userExist = checkUser.length;
 
         if (userExist > 0) {
-          console.log(user);
+          if (checkUser[0].oAuth === false) {
+            console.log(
+              `${profile.email} account is not associated with google`
+            );
+            return "/login";
+          }
         } else {
           const uidWithTimestamp = uid.stamp(32);
           const data = await prisma.user.create({
@@ -113,11 +118,13 @@ export const authOptions = {
               },
             },
           });
-          console.log(data);
+          console.log("create new account with google");
         }
       } else {
-        console.log(user);
+        console.log(`${user.name} logged in with email and password`);
+        return true;
       }
+      console.log(`${profile.name} sign in with google`);
       return true;
     },
     async jwt({ token, user }) {
