@@ -123,9 +123,9 @@ export async function PUT(request) {
             update: {
               updated_at: moment().toISOString(),
               akad_date: moment(akad_date).toISOString(),
-              akad_time: moment(akad_time).toISOString(),
+              akad_time,
               wedding_date: moment(wedding_date).toISOString(),
-              wedding_time: moment(wedding_time).toISOString(),
+              wedding_time,
               wedding_location,
               bridesName,
               groomsName,
