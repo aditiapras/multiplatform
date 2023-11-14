@@ -5,9 +5,10 @@ import FormDetail from "@/components/page/details/form";
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
-  const { WeddingDetail, userId } = await fetch(
+  const { weddingDetail, userId } = await fetch(
     `${process.env.NEXT_PUBLIC_FETCH_URL}/users?id=${session?.user?.id}`
   ).then((res) => res.json());
+
   return (
     <main className={`w-1/2 flex flex-col px-7 py-10 bg-white mx-auto`}>
       <p className="font-semibold text-2xl">Wedding Details</p>
@@ -18,10 +19,10 @@ export default async function Page() {
           </p>
           <p className="text-zinc-500 text-xs">
             Last update on{" "}
-            {moment(WeddingDetail?.created_at).format("YYYY/MM/DD HH:mm")}
+            {moment(weddingDetail?.created_at).format("YYYY/MM/DD HH:mm")}
           </p>
         </div>
-        <FormDetail weddingDetails={WeddingDetail} userId={userId} />
+        <FormDetail weddingDetails={weddingDetail} userId={userId} />
       </div>
     </main>
   );
