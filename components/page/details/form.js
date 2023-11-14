@@ -1,41 +1,25 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { editDetails } from "@/lib/actions";
+import { editWeddingDetails } from "@/lib/actions";
 import { MapPinIcon } from "lucide-react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import moment from "moment-timezone";
-import { useRouter } from "next/navigation";
 
-export default function FormDetail({ weddingDetails, userId }) {
+export default function FormDetail({ weddingDetails }) {
   const [disabled, setDisabled] = useState(true);
-  const router = useRouter();
-
-  const { register, handleSubmit } = useForm();
-
-  const onSubmit = async (data) => {
-    const body = {
-      ...data,
-      userId,
-    };
-    editDetails(body);
-    setDisabled(!disabled);
-    router.refresh();
-  };
 
   return (
     <div className="flex flex-col gap-5 justify-end items-end relative">
       <Button
-        onClick={() => setDisabled(!disabled)}
+        onClick={() => setDisabled(false)}
         className={`w-fit absolute -top-28 ${disabled ? "" : "bg-emerald-600"}`}
-        // disabled={!disabled}
       >
         {disabled ? "Edit" : "Save Changes"}
       </Button>
       <form
         className="flex flex-col gap-10 w-full mt-10"
-        onSubmit={handleSubmit(onSubmit)}
+        action={editWeddingDetails}
       >
         <div className="grid grid-cols-2 w-full gap-5">
           <p className="font-semibold text-xl">Brides Detail</p>
@@ -46,11 +30,10 @@ export default function FormDetail({ weddingDetails, userId }) {
             <input
               type="text"
               id="bridesName"
+              name="bridesName"
               className="p-2 border rounded-md focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:outline-zinc-400 transition-all text-sm disabled:opacity-70"
               required
-              {...register("bridesName", {
-                value: weddingDetails?.bridesName,
-              })}
+              defaultValue={weddingDetails?.bridesName}
               disabled={disabled}
               placeholder="Brides Name"
             />
@@ -62,11 +45,10 @@ export default function FormDetail({ weddingDetails, userId }) {
             <input
               type="text"
               id="brides_fathers_name"
+              name="brides_fathers_name"
               className="p-2 border rounded-md focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:outline-zinc-400 transition-all text-sm disabled:opacity-70"
               required
-              {...register("brides_fathers_name", {
-                value: weddingDetails?.brides_fathers_name,
-              })}
+              defaultValue={weddingDetails?.brides_fathers_name}
               disabled={disabled}
               placeholder="Father Brides Name"
             />
@@ -78,11 +60,10 @@ export default function FormDetail({ weddingDetails, userId }) {
             <input
               type="text"
               id="brides_mothers_name"
+              name="brides_mothers_name"
               className="p-2 border rounded-md focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:outline-zinc-400 transition-all text-sm disabled:opacity-70"
               required
-              {...register("brides_mothers_name", {
-                value: weddingDetails?.brides_mothers_name,
-              })}
+              defaultValue={weddingDetails?.brides_mothers_name}
               disabled={disabled}
               placeholder="Mother Brides Name"
             />
@@ -98,11 +79,10 @@ export default function FormDetail({ weddingDetails, userId }) {
             <input
               type="text"
               id="groomsName"
+              name="groomsName"
               className="p-2 border rounded-md focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:outline-zinc-400 transition-all text-sm disabled:opacity-70"
               required
-              {...register("groomsName", {
-                value: weddingDetails?.groomsName,
-              })}
+              defaultValue={weddingDetails?.groomsName}
               disabled={disabled}
               placeholder="Grooms Name"
             />
@@ -114,11 +94,10 @@ export default function FormDetail({ weddingDetails, userId }) {
             <input
               type="text"
               id="grooms_fathers_name"
+              name="grooms_fathers_name"
               className="p-2 border rounded-md focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:outline-zinc-400 transition-all text-sm disabled:opacity-70"
               required
-              {...register("grooms_fathers_name", {
-                value: weddingDetails?.grooms_fathers_name,
-              })}
+              defaultValue={weddingDetails?.grooms_fathers_name}
               disabled={disabled}
               placeholder="Father Grooms Name"
             />
@@ -130,11 +109,10 @@ export default function FormDetail({ weddingDetails, userId }) {
             <input
               type="text"
               id="grooms_mothers_name"
+              name="grooms_mothers_name"
               className="p-2 border rounded-md focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:outline-zinc-400 transition-all text-sm disabled:opacity-70"
               required
-              {...register("grooms_mothers_name", {
-                value: weddingDetails?.grooms_mothers_name,
-              })}
+              defaultValue={weddingDetails?.grooms_mothers_name}
               disabled={disabled}
               placeholder="Mother Grooms Name"
             />
@@ -150,13 +128,12 @@ export default function FormDetail({ weddingDetails, userId }) {
             <input
               type="date"
               id="wedding_date"
+              name="wedding_date"
               className="p-2 border rounded-md focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:outline-zinc-400 transition-all text-sm disabled:opacity-70"
               required
-              {...register("wedding_date", {
-                value: moment(weddingDetails?.wedding_date).format(
-                  "YYYY-MM-DD"
-                ),
-              })}
+              defaultValue={moment(weddingDetails?.wedding_date).format(
+                "YYYY-MM-DD"
+              )}
               disabled={disabled}
               placeholder="weddings Date"
             />
@@ -168,11 +145,10 @@ export default function FormDetail({ weddingDetails, userId }) {
             <input
               type="time"
               id="wedding_time"
+              name="wedding_time"
               className="p-2 border rounded-md focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:outline-zinc-400 transition-all text-sm disabled:opacity-70"
               required
-              {...register("wedding_time", {
-                value: weddingDetails?.wedding_time,
-              })}
+              defaultValue={weddingDetails?.wedding_time}
               disabled={disabled}
               placeholder="weddings Time"
             />
@@ -184,11 +160,12 @@ export default function FormDetail({ weddingDetails, userId }) {
             <input
               type="date"
               id="akad_date"
+              name="akad_date"
               className="p-2 border rounded-md focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:outline-zinc-400 transition-all text-sm disabled:opacity-70"
               required
-              {...register("akad_date", {
-                value: moment(weddingDetails?.akad_date).format("YYYY-MM-DD"),
-              })}
+              defaultValue={moment(weddingDetails?.akad_date).format(
+                "YYYY-MM-DD"
+              )}
               disabled={disabled}
               placeholder="akad Date"
             />
@@ -200,19 +177,16 @@ export default function FormDetail({ weddingDetails, userId }) {
             <input
               type="time"
               id="akad_time"
+              name="akad_time"
               className="p-2 border rounded-md focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:outline-zinc-400 transition-all text-sm disabled:opacity-70"
               required
-              {...register("akad_time", {
-                value: weddingDetails?.akad_time,
-              })}
+              defaultValue={weddingDetails?.akad_time}
               disabled={disabled}
               placeholder="akad Time"
             />
           </div>
         </div>
-
         <Separator />
-
         <div className="col-span-3 grid w-full items-center gap-5">
           <p className="font-semibold text-xl">Wedding Location</p>
           <div className="grid gap-1.5">
@@ -222,11 +196,10 @@ export default function FormDetail({ weddingDetails, userId }) {
             <input
               type="text"
               id="wedding_location"
+              name="wedding_location"
               className="p-2 border rounded-md focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:outline-zinc-400 transition-all text-sm disabled:opacity-70"
               required
-              {...register("wedding_location", {
-                value: weddingDetails?.wedding_location,
-              })}
+              defaultValue={weddingDetails?.wedding_location}
               disabled={disabled}
               placeholder="Wedding Location"
             />
@@ -240,8 +213,16 @@ export default function FormDetail({ weddingDetails, userId }) {
           </Button>
         </div>
         <Separator />
-        <Button className="w-fit" asChild>
-          <button type="submit">Save Changes</button>
+
+        <Button
+          type="submit"
+          className="w-fit"
+          onClick={() => {
+            setDisabled(true);
+          }}
+          disabled={disabled}
+        >
+          {disabled ? "Save Changes" : "Save Changes"}
         </Button>
       </form>
     </div>
