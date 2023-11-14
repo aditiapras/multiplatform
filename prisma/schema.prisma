@@ -30,7 +30,7 @@ model User {
 }
 
 model Guest {
-  guestId          Int       @unique
+  guestId          String    @unique
   url              String?   @db.VarChar(255)
   crated_at        DateTime? @db.DateTime()
   updated_at       DateTime? @db.DateTime()
@@ -52,9 +52,9 @@ model WeddingDetail {
   created_at          DateTime         @db.DateTime()
   updated_at          DateTime?        @db.DateTime()
   akad_date           DateTime?        @db.DateTime()
-  akad_time           DateTime?        @db.DateTime()
-  wedding_date        DateTime?        @db.Time()
-  wedding_time        DateTime?        @db.Time()
+  akad_time           String?          @db.VarChar(10)
+  wedding_date        DateTime?        @db.DateTime()
+  wedding_time        String?          @db.VarChar(10)
   wedding_location    String?          @db.VarChar(255)
   bridesName          String?          @db.VarChar(255)
   groomsName          String?          @db.VarChar(255)
